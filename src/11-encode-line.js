@@ -9,17 +9,19 @@
  *
  */
 function encodeLine(str) {
-  const obj = {};
   let result = '';
-  for (let i = 0; i < str.length; i++) {
-    if (!obj[str[i]]) {
-      obj[str[i]] = 1;
-    } else {
-      obj[str[i]] += 1;
+  for (let i = 0; i < str.length; i += 1) {
+    const letter = str[i];
+    let count = 1;
+    let j = i + 1;
+
+    while (j < str.length && str[j] === letter) {
+      count += 1;
+      j += 1;
     }
-  }
-  for (let key in obj) {
-    result += obj[key] + key;
+
+    i += count - 1;
+    result += (count === 1) ? `${letter}` : `${count}${letter}`;
   }
   return result;
 }
